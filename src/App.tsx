@@ -127,8 +127,30 @@ function App() {
               <div>
                 <h3 className="text-xl font-bold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">How it Works</a></li>
-                  <li><a href="#" className="hover:text-white">Success Stories</a></li>
+                  <li>
+                    <a 
+                      href="#how-it-works" 
+                      className="hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      How it Works
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#success-stories" 
+                      className="hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('success-stories')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Success Stories
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div>
