@@ -11,9 +11,10 @@ import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
 import PaymentGateway from './components/PaymentGateway';
 import { projects } from './data';
+import HomePage from './components/HomePage';
 
 function App() {
-  const [activeTab, setActiveTab] = React.useState('projects');
+  const [activeTab, setActiveTab] = React.useState('');
 
   return (
     <Router>
@@ -21,34 +22,24 @@ function App() {
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
         
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/project/:id" element={<ProjectDetails />} />
-          <Route path="/project/:id/financial" element={<FinancialContribution />} />
-          <Route path="/project/:id/engineer" element={<EngineerContribution />} />
-          <Route path="/payment-gateway" element={<PaymentGateway />} />
-          <Route path="/services" element={<ServiceCategories />} />
-          <Route path="/" element={
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={
             <main className="container mx-auto px-4 py-8">
               {/* Hero Section */}
               <section className="mb-12 text-center">
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  {activeTab === 'projects' ? 'Find Projects to Contribute' : 'Software Services'}
+                  Find Projects to Contribute
                 </h1>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  {activeTab === 'projects' 
-                    ? 'Connect with employers and contribute to exciting projects.'
-                    : 'Discover comprehensive software solutions for your business needs.'}
+                  Connect with employers and contribute to exciting projects.
                 </p>
 
-                {activeTab === 'projects' && (
-                  <button
-                    onClick={() => {/* Add post project logic */}}
-                    className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 inline-flex items-center space-x-2"
-                  >
-                    <span>Post a project and bring to our attention</span>
-                  </button>
-                )}
+                <button
+                  onClick={() => {/* Add post project logic */}}
+                  className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 inline-flex items-center space-x-2"
+                >
+                  <span>Post a project and bring to our attention</span>
+                </button>
                 
                 {/* Search Bar */}
                 <div className="mt-8 max-w-2xl mx-auto">
@@ -63,39 +54,39 @@ function App() {
                 </div>
               </section>
 
-              {/* Content */}
-              {activeTab === 'projects' ? (
-                <>
-                  {/* Filters */}
-                  <div className="mb-8 flex flex-wrap gap-4">
-                    <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200">
-                      All Categories
-                    </button>
-                    <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                      Web Development
-                    </button>
-                    <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                      Mobile Apps
-                    </button>
-                    <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                      AI/ML
-                    </button>
-                    <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                      DevOps
-                    </button>
-                  </div>
+              {/* Filters */}
+              <div className="mb-8 flex flex-wrap gap-4">
+                <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200">
+                  All Categories
+                </button>
+                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
+                  Web Development
+                </button>
+                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
+                  Mobile Apps
+                </button>
+                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
+                  AI/ML
+                </button>
+                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
+                  DevOps
+                </button>
+              </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project) => (
-                      <ProjectCard key={project.id} project={project} />
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <ServiceCategories />
-              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+              </div>
             </main>
           } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/project/:id" element={<ProjectDetails />} />
+          <Route path="/project/:id/financial" element={<FinancialContribution />} />
+          <Route path="/project/:id/engineer" element={<EngineerContribution />} />
+          <Route path="/payment-gateway" element={<PaymentGateway />} />
+          <Route path="/services" element={<ServiceCategories />} />
         </Routes>
 
         {/* Footer */}

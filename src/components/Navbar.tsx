@@ -11,14 +11,20 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleLogoClick = () => {
+    setActiveTab('');
+    navigate('/');
+    window.scrollTo(0, 0);
+  };
+
   const handleNavigation = (tab: string): void => {
     setActiveTab(tab);
     if (tab === 'projects') {
-      navigate('/');
+      navigate('/projects');
     } else if (tab === 'services') {
       navigate('/services');
     }
-    setIsMenuOpen(false); // Close menu after navigation
+    setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
@@ -27,12 +33,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" onClick={() => setActiveTab('projects')}>
+          <div 
+            onClick={handleLogoClick}
+            className="flex items-center space-x-2 cursor-pointer"
+          >
             <CodeIcon className="h-8 w-8 text-blue-600" />
             <span className="text-xl font-bold text-gray-900">
               National Resilience Platform
             </span>
-          </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
