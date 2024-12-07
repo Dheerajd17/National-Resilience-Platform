@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Globe, Lightbulb, CheckCircle, Target, Award, MessageSquare, LifeBuoy } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if there's a hash in the URL
+    if (window.location.hash) {
+      // Remove the '#' from the hash
+      const sectionId = window.location.hash.slice(1);
+      // Scroll to the section after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f9fafb]">

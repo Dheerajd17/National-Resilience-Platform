@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { SearchIcon } from 'lucide-react';
 import Navbar from './components/Navbar';
 import ProjectCard from './components/ProjectCard';
@@ -85,6 +85,22 @@ function App() {
     setFilteredProjects(sortedProjects);
   };
 
+  const handleScrollToSection = (sectionId: string) => {
+    // If not on home page, navigate to home first
+    if (window.location.pathname !== '/') {
+      window.location.href = `/#${sectionId}`;
+      // Add event listener to scroll after page load
+      window.addEventListener('load', () => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, { once: true }); // Remove listener after first execution
+    } else {
+      // If already on home page, just scroll
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
@@ -128,28 +144,20 @@ function App() {
                 <h3 className="text-xl font-bold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a 
-                      href="#how-it-works" 
+                    <button
+                      onClick={() => handleScrollToSection('how-it-works')}
                       className="hover:text-white transition-colors duration-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
                     >
                       How it Works
-                    </a>
+                    </button>
                   </li>
                   <li>
-                    <a 
-                      href="#success-stories" 
+                    <button
+                      onClick={() => handleScrollToSection('success-stories')}
                       className="hover:text-white transition-colors duration-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById('success-stories')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
                     >
                       Success Stories
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -157,40 +165,28 @@ function App() {
                 <h3 className="text-xl font-bold mb-4">Support</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>
-                    <a 
-                      href="#help-center" 
+                    <button
+                      onClick={() => handleScrollToSection('help-center')}
                       className="hover:text-white transition-colors duration-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById('help-center')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
                     >
                       Help Center
-                    </a>
+                    </button>
                   </li>
                   <li>
-                    <a 
-                      href="#terms-of-service" 
+                    <button
+                      onClick={() => handleScrollToSection('terms-of-service')}
                       className="hover:text-white transition-colors duration-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById('terms-of-service')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
                     >
                       Terms of Service
-                    </a>
+                    </button>
                   </li>
                   <li>
-                    <a 
-                      href="#privacy-policy" 
+                    <button
+                      onClick={() => handleScrollToSection('privacy-policy')}
                       className="hover:text-white transition-colors duration-300"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        document.getElementById('privacy-policy')?.scrollIntoView({ behavior: 'smooth' });
-                      }}
                     >
                       Privacy Policy
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>
