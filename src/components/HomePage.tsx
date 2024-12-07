@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Hero Section -Modified to remove the button */}
-      <div className="bg-gradient-to-b from-blue-50 to-[#f9fafb]">
+      <div className="bg-gradient-to-b from-blue-100 to-[#f9fafb]">
         <div className="container mx-auto px-4 py-20">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
