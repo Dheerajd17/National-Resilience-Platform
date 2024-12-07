@@ -9,7 +9,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavigation = (tab: string): void => {
     setActiveTab(tab);
@@ -80,7 +80,6 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           <button 
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <X className="h-6 w-6 text-gray-600" />
@@ -92,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 border-t">
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50">
             <div className="flex flex-col py-2">
               <button
                 onClick={() => handleNavigation('projects')}
@@ -119,14 +118,14 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
               <Link
                 to="/login"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
               >
                 Sign In
               </Link>
               <Link
                 to="/signup"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
               >
                 Sign Up
               </Link>
