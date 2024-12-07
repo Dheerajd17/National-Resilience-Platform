@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">About the Platform</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="bg-blue-50 p-8 rounded-lg shadow-sm">
+            <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <p className="text-lg text-gray-600 leading-relaxed">
                 The National Resilience Platform is a groundbreaking initiative that connects talented professionals, 
                 engineers, and innovators with critical national projects. Our platform serves as a bridge between 
