@@ -12,9 +12,78 @@ import SignUp from './components/Auth/SignUp';
 import PaymentGateway from './components/PaymentGateway';
 import { projects } from './data';
 import HomePage from './components/HomePage';
+import { useState } from 'react';
+import ProjectsPage from './components/ProjectsPage';
+import PostProject from './components/PostProject';
 
 function App() {
   const [activeTab, setActiveTab] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredProjects, setFilteredProjects] = useState(projects);
+  const [activeCategory, setActiveCategory] = useState('All Categories');
+
+  const categories = [
+    'All Categories',
+    'Web Development',
+    'Mobile Apps',
+    'AI/ML',
+    'DevOps'
+  ];
+
+  const handleCategoryFilter = (category: string) => {
+    setActiveCategory(category);
+    
+    if (category === 'All Categories') {
+      setFilteredProjects(projects);
+      return;
+    }
+
+    const filtered = projects.filter(project => 
+      project.skills.some(skill => skill.toLowerCase() === category.toLowerCase())
+    );
+    setFilteredProjects(filtered);
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    
+    if (!query) {
+      setFilteredProjects(projects);
+      return;
+    }
+
+    const searchLower = query.toLowerCase();
+    
+    // Sort projects based on relevance
+    const sortedProjects = projects
+      .map(project => {
+        // Calculate relevance score
+        let score = 0;
+        
+        // Highest priority for "Project Contributions" match
+        if (project.title.toLowerCase().includes('project contribution') ||
+            project.description.toLowerCase().includes('project contribution')) {
+          score += 100;
+        }
+        
+        // Regular matches
+        if (project.title.toLowerCase().includes(searchLower)) {
+          score += 50;
+        }
+        if (project.description.toLowerCase().includes(searchLower)) {
+          score += 25;
+        }
+        if (project.skills.some(skill => skill.toLowerCase().includes(searchLower))) {
+          score += 10;
+        }
+
+        return { ...project, score };
+      })
+      .filter(project => project.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    setFilteredProjects(sortedProjects);
+  };
 
   return (
     <Router>
@@ -23,63 +92,21 @@ function App() {
         
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={
-            <main className="container mx-auto px-4 py-8">
-              {/* Hero Section */}
-              <section className="mb-12 text-center">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  Find Projects to Contribute
-                </h1>
-                <p className="text-gray-600 max-w-2xl mx-auto">
-                  Connect with employers and contribute to exciting projects.
-                </p>
-
-                <button
-                  onClick={() => {/* Add post project logic */}}
-                  className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 inline-flex items-center space-x-2"
-                >
-                  <span>Post a project and bring to our attention</span>
-                </button>
-                
-                {/* Search Bar */}
-                <div className="mt-8 max-w-2xl mx-auto">
-                  <div className="relative">
-                    <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                    <input
-                      type="text"
-                      placeholder={`Search ${activeTab === 'projects' ? 'projects' : 'services'}...`}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* Filters */}
-              <div className="mb-8 flex flex-wrap gap-4">
-                <button className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200">
-                  All Categories
-                </button>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                  Web Development
-                </button>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                  Mobile Apps
-                </button>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                  AI/ML
-                </button>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200">
-                  DevOps
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
-            </main>
-          } />
+          <Route 
+            path="/projects" 
+            element={
+              <ProjectsPage 
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                filteredProjects={filteredProjects}
+                handleSearch={handleSearch}
+                activeCategory={activeCategory}
+                handleCategoryFilter={handleCategoryFilter}
+                categories={categories}
+              />
+            } 
+          />
+          <Route path="/post-project" element={<PostProject />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/project/:id" element={<ProjectDetails />} />

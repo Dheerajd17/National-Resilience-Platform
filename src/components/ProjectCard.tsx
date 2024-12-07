@@ -15,7 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 flex flex-col h-full">
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
