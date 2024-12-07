@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate }from 'react-router-dom';
 import { BriefcaseIcon, CodeIcon, MenuIcon } from 'lucide-react';
 
 interface NavbarProps {
@@ -10,12 +10,22 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
 
+  const handleNavigation = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === 'projects') {
+      navigate('/');
+    } else if (tab === 'services') {
+      navigate('/services');
+    }
+    window.scrollTo(0, 0);
+  };
+
   return (
     <nav className="bg-white shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2" onClick={() => setActiveTab('projects')}>
             <CodeIcon className="h-8 w-8 text-blue-600" />
             <span className="text-xl font-bold text-gray-900">
               National Resilience Platform
@@ -25,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           {/* Navigation Links */}
           <div className="hidden md:flex space-x-8">
             <button
-              onClick={() => setActiveTab('projects')}
+              onClick={() => handleNavigation('projects')}
               className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
                 activeTab === 'projects'
                   ? 'text-blue-600 bg-blue-50'
@@ -36,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
               <span>Project Contributions</span>
             </button>
             <button
-              onClick={() => setActiveTab('services')}
+              onClick={() => handleNavigation('services')}
               className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
                 activeTab === 'services'
                   ? 'text-blue-600 bg-blue-50'

@@ -9,12 +9,25 @@ const EngineerContribution: React.FC = () => {
   const project = projects.find(p => p.id === Number(id));
   const [message, setMessage] = useState('');
   const [activeTab, setActiveTab] = useState('chat');
-
-  const mockMessages = [
+  const [messages, setMessages] = useState([
     { id: 1, user: 'Sarah Chen', role: 'Project Lead', message: 'Welcome to the team! Let me know if you have any questions about the architecture.', time: '2h ago' },
     { id: 2, user: 'Mike Ross', role: 'Developer', message: 'I\'ve just pushed the updates to the authentication system. Please review when you can.', time: '1h ago' },
     { id: 3, user: 'Emma Wilson', role: 'Designer', message: 'The new UI mockups are ready for implementation. Check them out in Figma.', time: '30m ago' }
-  ];
+  ]);
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      const newMessage = {
+        id: messages.length + 1,
+        user: 'You',
+        role: 'Engineer',
+        message: message.trim(),
+        time: 'Just now'
+      };
+      setMessages([...messages, newMessage]);
+      setMessage('');
+    }
+  };
 
   const milestones = [
     {
@@ -117,7 +130,7 @@ const EngineerContribution: React.FC = () => {
               {/* Chat Messages */}
               <div className="lg:col-span-2 bg-white rounded-lg shadow-md">
                 <div className="p-6 space-y-6">
-                  {mockMessages.map((msg) => (
+                  {messages.map((msg) => (
                     <div key={msg.id} className="flex space-x-4">
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -143,8 +156,16 @@ const EngineerContribution: React.FC = () => {
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Type your message..."
                       className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSendMessage();
+                        }
+                      }}
                     />
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    <button 
+                      onClick={handleSendMessage}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    >
                       <Send className="h-5 w-5" />
                     </button>
                   </div>

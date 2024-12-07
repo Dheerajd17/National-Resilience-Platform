@@ -27,6 +27,7 @@ function App() {
           <Route path="/project/:id/financial" element={<FinancialContribution />} />
           <Route path="/project/:id/engineer" element={<EngineerContribution />} />
           <Route path="/payment-gateway" element={<PaymentGateway />} />
+          <Route path="/services" element={<ServiceCategories />} />
           <Route path="/" element={
             <main className="container mx-auto px-4 py-8">
               {/* Hero Section */}
@@ -36,7 +37,7 @@ function App() {
                 </h1>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                   {activeTab === 'projects' 
-                    ? 'Connect with employers and contribute to exciting projects worldwide.'
+                    ? 'Connect with employers and contribute to exciting projects.'
                     : 'Discover comprehensive software solutions for your business needs.'}
                 </p>
 
@@ -45,7 +46,7 @@ function App() {
                     onClick={() => {/* Add post project logic */}}
                     className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 inline-flex items-center space-x-2"
                   >
-                    <span>Post a Project</span>
+                    <span>Post a project and bring to our attention</span>
                   </button>
                 )}
                 
@@ -103,14 +104,13 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
                 <h3 className="text-xl font-bold mb-4">About Us</h3>
-                <p className="text-gray-400">Connecting talented professionals with exciting opportunities worldwide.</p>
+                <p className="text-gray-400">Connecting talented professionals with exciting opportunities.</p>
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li><a href="#" className="hover:text-white">How it Works</a></li>
                   <li><a href="#" className="hover:text-white">Success Stories</a></li>
-                  <li><a href="#" className="hover:text-white">Pricing</a></li>
                 </ul>
               </div>
               <div>
@@ -125,7 +125,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-4">Contact</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>Email: contact@example.com</li>
-                  <li>Phone: (555) 123-4567</li>
+                  <li>Phone: (555) 123-45678</li>
                 </ul>
               </div>
             </div>

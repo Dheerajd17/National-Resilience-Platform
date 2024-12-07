@@ -10,18 +10,85 @@ const SignUp: React.FC = () => {
     password: '',
     confirmPassword: ''
   });
+ const [showSuccess, setShowSuccess] = useState(false);
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Add signup logic here
-    console.log('Signup attempt:', formData);
+  // Password validation function
+  const validatePassword = (password: string) => {
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasAlphanumeric = /^(?=.*[a-zA-Z])(?=.*\d)/.test(password);
+    
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters long';
+    }
+    if (!hasSpecialChar) {
+      return 'Password must contain at least one special character';
+    }
+    if (!hasAlphanumeric) {
+      return 'Password must contain both letters and numbers';
+    }
+    return '';
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Clear errors when typing
+    setErrors(prev => ({
+      ...prev,
+      [name]: ''
+    }));
+
+    // Validate password as user types
+    if (name === 'password') {
+      const passwordError = validatePassword(value);
+      setErrors(prev => ({
+        ...prev,
+        password: passwordError
+      }));
+    }
+
+    // Check password match as user types confirm password
+    if (name === 'confirmPassword') {
+      setErrors(prev => ({
+        ...prev,
+        confirmPassword: value !== formData.password ? 'Passwords do not match' : ''
+      }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate all fields
+    const newErrors = {
+      email: !formData.email ? 'Email is required' : '',
+      password: validatePassword(formData.password),
+      confirmPassword: formData.password !== formData.confirmPassword ? 'Passwords do not match' : ''
+    };
+
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error !== '')) {
+      return;
+    }
+
+    // Show success message
+    setShowSuccess(true);
+
+    // Redirect to home page after 2 seconds
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   return (
@@ -43,6 +110,12 @@ const SignUp: React.FC = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {showSuccess && (
+            <div className="mb-4 p-4 rounded-md bg-green-50 text-green-800">
+              Account created successfully! Redirecting...
+            </div>
+          )}
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -68,10 +141,7 @@ const SignUp: React.FC = () => {
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
+              <div className="mt-1">
                 <input
                   id="email"
                   name="email"
@@ -80,8 +150,13 @@ const SignUp: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className={`appearance-none block w-full px-3 py-2 border ${
+                    errors.email ? 'border-red-300' : 'border-gray-300'
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                 />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -89,10 +164,7 @@ const SignUp: React.FC = () => {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
+              <div className="mt-1">
                 <input
                   id="password"
                   name="password"
@@ -100,8 +172,13 @@ const SignUp: React.FC = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className={`appearance-none block w-full px-3 py-2 border ${
+                    errors.password ? 'border-red-300' : 'border-gray-300'
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                 />
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                )}
               </div>
             </div>
 
@@ -109,10 +186,7 @@ const SignUp: React.FC = () => {
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                 Confirm Password
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
+              <div className="mt-1">
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
@@ -120,8 +194,13 @@ const SignUp: React.FC = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className={`appearance-none block w-full px-3 py-2 border ${
+                    errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                 />
+                {errors.confirmPassword && (
+                  <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                )}
               </div>
             </div>
 

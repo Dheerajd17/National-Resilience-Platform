@@ -12,6 +12,11 @@ const ProjectDetails: React.FC = () => {
   const navigate = useNavigate();
   const project = projects.find(p => p.id === Number(id));
 
+  const handleContribution = (path: string) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
+
   if (!project) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -90,14 +95,14 @@ const ProjectDetails: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
-            onClick={() => navigate(`/project/${project.id}/engineer`)}
+            onClick={() => handleContribution(`/project/${project.id}/engineer`)}
             className="flex items-center justify-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
             <Code className="h-5 w-5" />
             <span>Contribute as Engineer</span>
           </button>
           <button
-            onClick={() => navigate(`/project/${project.id}/financial`)}
+            onClick={() => handleContribution(`/project/${project.id}/financial`)}
             className="flex items-center justify-center space-x-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
           >
             <Coins className="h-5 w-5" />
