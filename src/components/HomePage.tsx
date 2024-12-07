@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Shield, Users, Globe, Lightbulb, CheckCircle, Target, Award } from 'lucide-react';
+import { ArrowRight, Shield, Users, Globe, Lightbulb, CheckCircle, Target, Award, MessageSquare, LifeBuoy } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -169,6 +169,100 @@ const HomePage: React.FC = () => {
           >
             Join Our Community
           </button>
+        </div>
+      </div>
+
+      {/* Help Center Section */}
+      <div id="help-center" className="py-20 bg-[#f9fafb]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Help Center</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <Users className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">User Guides</h3>
+              <p className="text-gray-600">
+                Comprehensive guides to help you navigate and make the most of our platform's features.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <MessageSquare className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">FAQs</h3>
+              <p className="text-gray-600">
+                Find answers to commonly asked questions about our platform and services.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <LifeBuoy className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-center">Support Team</h3>
+              <p className="text-gray-600">
+                Our dedicated support team is available 24/7 to assist you with any questions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Terms of Service Section */}
+      <div id="terms-of-service" className="py-20 bg-[#f9fafb]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Terms of Service</h2>
+          <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-bold mb-3">1. Platform Usage</h3>
+                <p className="text-gray-600">
+                  By accessing our platform, you agree to use it responsibly and in accordance with all applicable laws and regulations.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3">2. User Responsibilities</h3>
+                <p className="text-gray-600">
+                  Users are responsible for maintaining the confidentiality of their account information and for all activities under their account.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3">3. Project Guidelines</h3>
+                <p className="text-gray-600">
+                  All projects must comply with our security and quality standards to ensure the best outcomes for our national resilience initiatives.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Privacy Policy Section */}
+      <div id="privacy-policy" className="py-20 bg-[#f9fafb]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Privacy Policy</h2>
+          <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-bold mb-3">Data Collection</h3>
+                <p className="text-gray-600">
+                  We collect and process personal information only as necessary to provide our services and improve your platform experience.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3">Data Security</h3>
+                <p className="text-gray-600">
+                  We implement robust security measures to protect your personal information and maintain the highest standards of data privacy.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3">Your Rights</h3>
+                <p className="text-gray-600">
+                  You have the right to access, modify, or delete your personal information at any time through your account settings.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

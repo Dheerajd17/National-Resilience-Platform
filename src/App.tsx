@@ -156,9 +156,42 @@ function App() {
               <div>
                 <h3 className="text-xl font-bold mb-4">Support</h3>
                 <ul className="space-y-2 text-gray-400">
-                  <li><a href="#" className="hover:text-white">Help Center</a></li>
-                  <li><a href="#" className="hover:text-white">Terms of Service</a></li>
-                  <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+                  <li>
+                    <a 
+                      href="#help-center" 
+                      className="hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('help-center')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Help Center
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#terms-of-service" 
+                      className="hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('terms-of-service')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="#privacy-policy" 
+                      className="hover:text-white transition-colors duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('privacy-policy')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div>
