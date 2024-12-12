@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BriefcaseIcon, CodeIcon, MenuIcon, X } from 'lucide-react';
+import { BriefcaseIcon, CodeIcon, MenuIcon, X, Shield, Globe2, Network, Cpu, Server, Layers, Building2, CircuitBoard, CloudCog, Combine, Container, Factory, FileCode2, GitFork, HardDrive, Hexagon, LayoutGrid, LineChart, Power, Radio, Radar, Satellite, Scale, Share2, ShieldCheck, TreePine, Unplug, Workflow, Zap } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -35,16 +35,16 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           {/* Logo */}
           <div 
             onClick={handleLogoClick}
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-2 cursor-pointer w-1/4"
           >
-            <CodeIcon className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">
-              National Resilience Platform
+            <ShieldCheck className="h-8 w-8 text-gray-900" />
+            <span className="text-xl font-bold text-blue-600">
+              NRP
             </span>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex space-x-8 justify-center flex-1">
             <button
               onClick={() => handleNavigation('projects')}
               className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           </div>
 
           {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4 w-1/4 justify-end">
             <Link
               to="/login"
               className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md"

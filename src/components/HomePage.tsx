@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* About the Website Section */}
-      <div className="py-20 bg-[#f9fafb]">
+      <div id="about-platform" className="py-20 bg-[#f9fafb]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">About the Platform</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -80,7 +80,7 @@ const HomePage: React.FC = () => {
                 <Target className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">Mission</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 To strengthen national security through technological innovation and collaboration.
               </p>
             </div>
@@ -89,7 +89,7 @@ const HomePage: React.FC = () => {
                 <Lightbulb className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">Vision</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 Creating a resilient future through community-driven technological solutions.
               </p>
             </div>
@@ -98,7 +98,7 @@ const HomePage: React.FC = () => {
                 <CheckCircle className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">Goal</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 Connecting experts with critical projects to solve national challenges.
               </p>
             </div>
@@ -110,27 +110,63 @@ const HomePage: React.FC = () => {
       <div id="how-it-works" className="py-20 bg-[#f9fafb]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How it Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            {/* Step 1 */}
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">1</div>
               <h3 className="font-bold mb-2">Browse Projects</h3>
               <p className="text-gray-600">Explore available projects that match your expertise</p>
             </div>
+
+            {/* Arrow 1 */}
+            <div className="hidden md:block absolute left-[23%] top-1/2 transform -translate-y-1/2">
+              <div className="flex items-center">
+                <div className="h-0.5 w-12 bg-blue-600"></div>
+                <div className="w-4 h-4 border-t-2 border-r-2 border-blue-600 transform rotate-45"></div>
+              </div>
+            </div>
+
+            {/* Step 2 */}
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">2</div>
               <h3 className="font-bold mb-2">Choose Contribution</h3>
               <p className="text-gray-600">Select how you want to contribute - technically or financially</p>
             </div>
+
+            {/* Arrow 2 */}
+            <div className="hidden md:block absolute left-[48%] top-1/2 transform -translate-y-1/2">
+              <div className="flex items-center">
+                <div className="h-0.5 w-12 bg-blue-600"></div>
+                <div className="w-4 h-4 border-t-2 border-r-2 border-blue-600 transform rotate-45"></div>
+              </div>
+            </div>
+
+            {/* Step 3 */}
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">3</div>
               <h3 className="font-bold mb-2">Submit Proposal</h3>
               <p className="text-gray-600">Present your ideas or make your contribution</p>
             </div>
+
+            {/* Arrow 3 */}
+            <div className="hidden md:block absolute left-[73%] top-1/2 transform -translate-y-1/2">
+              <div className="flex items-center">
+                <div className="h-0.5 w-12 bg-blue-600"></div>
+                <div className="w-4 h-4 border-t-2 border-r-2 border-blue-600 transform rotate-45"></div>
+              </div>
+            </div>
+
+            {/* Step 4 */}
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">4</div>
               <h3 className="font-bold mb-2">Start Contributing</h3>
               <p className="text-gray-600">Begin working on approved projects</p>
             </div>
+
+            {/* Mobile Arrows */}
+            <div className="md:hidden w-0.5 h-8 bg-blue-600 mx-auto my-2"></div>
+            <div className="md:hidden w-0.5 h-8 bg-blue-600 mx-auto my-2"></div>
+            <div className="md:hidden w-0.5 h-8 bg-blue-600 mx-auto my-2"></div>
           </div>
         </div>
       </div>
@@ -145,7 +181,7 @@ const HomePage: React.FC = () => {
                 <Award className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-2 text-center">Cybersecurity Enhancement</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-center">
                 A team of experts developed an advanced threat detection system, improving national infrastructure security by 60%.
               </p>
             </div>
@@ -154,7 +190,7 @@ const HomePage: React.FC = () => {
                 <Award className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-2 text-center">Emergency Response System</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-center">
                 Innovative AI-powered solution reduced emergency response times by 45% in critical situations.
               </p>
             </div>
@@ -163,7 +199,7 @@ const HomePage: React.FC = () => {
                 <Award className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-2 text-center">Data Analytics Platform</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-center">
                 Created a comprehensive data analysis system that helped prevent multiple security breaches.
               </p>
             </div>
@@ -194,7 +230,7 @@ const HomePage: React.FC = () => {
                 <Users className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">User Guides</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 Comprehensive guides to help you navigate and make the most of our platform's features.
               </p>
             </div>
@@ -203,7 +239,7 @@ const HomePage: React.FC = () => {
                 <MessageSquare className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">FAQs</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 Find answers to commonly asked questions about our platform and services.
               </p>
             </div>
@@ -212,7 +248,7 @@ const HomePage: React.FC = () => {
                 <LifeBuoy className="h-12 w-12 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">Support Team</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-center">
                 Our dedicated support team is available 24/7 to assist you with any questions.
               </p>
             </div>
