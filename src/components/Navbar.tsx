@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BriefcaseIcon, CodeIcon, MenuIcon, X, ShieldCheck } from 'lucide-react';
+import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2 } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -47,21 +47,21 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           <div className="hidden md:flex space-x-8">
             <button
               onClick={() => handleNavigation('projects')}
-              className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md font-bold ${
                 activeTab === 'projects'
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
-              <BriefcaseIcon className="h-5 w-5" />
+              <FolderGit2 className="h-5 w-5" />
               <span>Project Contributions</span>
             </button>
             <button
               onClick={() => handleNavigation('services')}
-              className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md font-bold ${
                 activeTab === 'services'
                   ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
               <CodeIcon className="h-5 w-5" />
@@ -73,13 +73,13 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           <div className="hidden md:flex items-center space-x-4 absolute right-4">
             <Link
               to="/login"
-              className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md"
+              className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md font-bold"
             >
               Sign In
             </Link>
             <Link
               to="/signup"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-bold"
             >
               Sign Up
             </Link>
@@ -104,21 +104,21 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
             <div className="flex flex-col py-2">
               <button
                 onClick={() => handleNavigation('projects')}
-                className={`flex items-center space-x-2 px-4 py-3 ${
+                className={`flex items-center space-x-2 px-4 py-3 font-bold ${
                   activeTab === 'projects'
                     ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
-                <BriefcaseIcon className="h-5 w-5" />
+                <FolderGit2 className="h-5 w-5" />
                 <span>Project Contributions</span>
               </button>
               <button
                 onClick={() => handleNavigation('services')}
-                className={`flex items-center space-x-2 px-4 py-3 ${
+                className={`flex items-center space-x-2 px-4 py-3 font-bold ${
                   activeTab === 'services'
                     ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
                 <CodeIcon className="h-5 w-5" />
@@ -127,14 +127,14 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
               <Link
                 to="/login"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
               >
                 Sign In
               </Link>
               <Link
                 to="/signup"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
               >
                 Sign Up
               </Link>
