@@ -20,7 +20,7 @@ const applications: Record<string, Application[]> = {
       id: '1',
       name: 'Shopify',
       description: 'Complete e-commerce platform for online stores and retail point-of-sale systems',
-      icon: 'https://cdn.shopify.com/app-store/listing_images/21d06b1c0d4eff7c8daf45bfc8939c4a/icon/CNer9bX0lu8CEAE=.png',
+      icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfAG1sZJEG7XK4uH6271f8HKn458g1T4nZxQ&s',
       rating: 4.8,
       reviews: 189000,
       users: 1400000,
@@ -36,6 +36,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.6,
       reviews: 102000,
       users: 847000,
+      badge: 'Top Rated',
       link: 'https://woocommerce.com/mobile/'
     },
     {
@@ -46,16 +47,18 @@ const applications: Record<string, Application[]> = {
       rating: 4.5,
       reviews: 76000,
       users: 623000,
+      badge: 'Enterprise Choice',
       link: 'https://business.adobe.com/products/magento/magento-commerce.html'
     },
     {
       id: '4',
       name: 'OpenCart',
       description: 'User-friendly open-source e-commerce platform',
-      icon: 'https://toppng.com/uploads/preview/opencart-logo-11609371003zzbvbdo4yq.png',
+      icon: 'https://w1.pngwing.com/pngs/851/683/png-transparent-email-symbol-opencart-business-business-process-online-shopping-mobile-phones-arcaqua-marketing.png',
       rating: 4.3,
       reviews: 44000,
       users: 347000,
+      badge: 'Budget Friendly',
       link: 'https://www.opencart.com/index.php?route=cms/download'
     }
   ],
@@ -68,6 +71,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.7,
       reviews: 67000,
       users: 289000,
+      badge: 'Top Rated',
       link: 'https://www.fleetio.com/'
     },
     {
@@ -78,6 +82,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.6,
       reviews: 143000,
       users: 567000,
+      badge: 'Most Popular',
       link: 'https://www.shipstation.com/'
     },
     {
@@ -88,6 +93,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.5,
       reviews: 50000,
       users: 100000,
+      badge: 'Best for Startups',
       link: 'https://onfleet.com/'
     }
   ],
@@ -100,6 +106,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.8,
       reviews: 1600000,
       users: 4300000,
+      badge: 'Most Popular',
       link: 'https://www.tableau.com/products/desktop'
     },
     {
@@ -110,6 +117,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.7,
       reviews: 892000,
       users: 2800000,
+      badge: 'Best Value',
       link: 'https://powerbi.microsoft.com/'
     },
     {
@@ -120,6 +128,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.6,
       reviews: 500000,
       users: 2000000,
+      badge: 'Rising Star',
       link: 'https://www.boldbi.com/'
     },
     {
@@ -130,6 +139,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.5,
       reviews: 200000,
       users: 1000000,
+      badge: 'AI Powered',
       link: 'https://www.sisense.com/'
     }
   ],
@@ -142,6 +152,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.8,
       reviews: 2400000,
       users: 7800000,
+      badge: 'Market Leader',
       link: 'https://www.salesforce.com/'
     },
     {
@@ -152,6 +163,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.7,
       reviews: 947000,
       users: 3200000,
+      badge: 'Most Popular',
       link: 'https://www.hubspot.com/'
     },
     {
@@ -162,6 +174,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.6,
       reviews: 800000,
       users: 2000000,
+      badge: 'Best for SMBs',
       link: 'https://www.pipedrive.com/'
     },
     {
@@ -172,6 +185,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.5,
       reviews: 1000000,
       users: 5000000,
+      badge: 'Best All-in-One',
       link: 'https://www.zoho.com/crm/'
     }
   ],
@@ -184,6 +198,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.8,
       reviews: 3700000,
       users: 12400000,
+      badge: 'Market Leader',
       link: 'https://aws.amazon.com/'
     },
     {
@@ -194,6 +209,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.7,
       reviews: 2100000,
       users: 8900000,
+      badge: 'Most Innovative',
       link: 'https://cloud.google.com/'
     },
     {
@@ -204,6 +220,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.7,
       reviews: 8000000,
       users: 15000000,
+      badge: 'Enterprise Choice',
       link: 'https://azure.microsoft.com/'
     },
     {
@@ -214,6 +231,7 @@ const applications: Record<string, Application[]> = {
       rating: 4.6,
       reviews: 1000000,
       users: 5000000,
+      badge: 'Developer Choice',
       link: 'https://www.digitalocean.com/'
     }
   ]
@@ -222,6 +240,21 @@ const applications: Record<string, Application[]> = {
 interface ApplicationsListProps {
   categoryId: string;
 }
+
+// Add a helper function to determine badge color
+const getBadgeColor = (badge: string): string => {
+  switch (badge) {
+    case 'Most Popular':
+    case 'Market Leader':
+      return 'bg-blue-600'; // Keep blue for popularity/leadership badges
+    case 'Enterprise Choice':
+    case 'AI Powered':
+    case 'Most Innovative':
+      return 'bg-purple-600'; // Purple for technology/innovation badges
+    default:
+      return 'bg-blue-600'; // Default blue for other badges
+  }
+};
 
 const ApplicationsList: React.FC<ApplicationsListProps> = ({ categoryId }) => {
   const apps = applications[categoryId] || [];
@@ -270,11 +303,6 @@ const ApplicationsList: React.FC<ApplicationsListProps> = ({ categoryId }) => {
             key={app.id}
             className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 relative"
           >
-            {app.badge && (
-              <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
-                {app.badge}
-              </div>
-            )}
             <a
               href={app.link}
               target="_blank"
@@ -296,10 +324,17 @@ const ApplicationsList: React.FC<ApplicationsListProps> = ({ categoryId }) => {
                 </div>
                 <p className="text-gray-600 mt-1">{app.description}</p>
                 <div className="flex items-center justify-between mt-2 text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <span className="text-yellow-400">★</span>
-                    <span className="ml-1">{app.rating}</span>
-                    <span className="ml-2">({formatCount(app.reviews)} reviews)</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center">
+                      <span className="text-yellow-400">★</span>
+                      <span className="ml-1">{app.rating}</span>
+                      <span className="ml-2">({formatCount(app.reviews)} reviews)</span>
+                    </div>
+                    {app.badge && (
+                      <span className={`${getBadgeColor(app.badge)} text-white text-xs px-2 py-1 rounded-full`}>
+                        {app.badge}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center">
                     <span className="text-blue-600">
