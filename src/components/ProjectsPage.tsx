@@ -66,7 +66,7 @@ const ProjectsPage: React.FC<ProjectsPageProps> = ({
             className={`px-4 py-2 rounded-full transition-colors duration-300 ${
               activeCategory === category
                 ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-300'
             }`}
           >
             {category}

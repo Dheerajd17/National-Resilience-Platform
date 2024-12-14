@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { SearchIcon } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { SearchIcon, ArrowLeft } from 'lucide-react';
 import Navbar from './components/Navbar';
 import ProjectCard from './components/ProjectCard';
 import ServiceCategories from './components/ServiceCategories';
@@ -15,6 +15,36 @@ import HomePage from './components/HomePage';
 import { useState } from 'react';
 import ProjectsPage from './components/ProjectsPage';
 import PostProject from './components/PostProject';
+import ApplicationsList from './components/Applications/ApplicationsList';
+
+// Create a BackButton component
+const BackButton = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const showBackButton = location.pathname !== '/';
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  if (!showBackButton) return null;
+
+  return (
+    <button
+      onClick={handleBack}
+      className="fixed top-4 left-4 z-50 p-3 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 group"
+      aria-label="Go back"
+    >
+      <ArrowLeft className="h-6 w-6 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+    </button>
+  );
+};
+
+// Create a wrapper component to handle the categoryId parameter
+const ApplicationsListWrapper = () => {
+  const { categoryId } = useParams();
+  return <ApplicationsList categoryId={categoryId || ''} />;
+};
 
 function App() {
   const [activeTab, setActiveTab] = React.useState('');
@@ -111,6 +141,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
+        <BackButton />
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
         
         <Routes>
@@ -137,6 +168,7 @@ function App() {
           <Route path="/project/:id/engineer" element={<EngineerContribution />} />
           <Route path="/payment-gateway" element={<PaymentGateway />} />
           <Route path="/services" element={<ServiceCategories />} />
+          <Route path="/services/:categoryId/applications" element={<ApplicationsListWrapper />} />
         </Routes>
 
         {/* Footer */}

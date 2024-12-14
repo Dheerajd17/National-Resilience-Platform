@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BriefcaseIcon, CodeIcon, MenuIcon, X, Shield, Globe2, Network, Cpu, Server, Layers, Building2, CircuitBoard, CloudCog, Combine, Container, Factory, FileCode2, GitFork, HardDrive, Hexagon, LayoutGrid, LineChart, Power, Radio, Radar, Satellite, Scale, Share2, ShieldCheck, TreePine, Unplug, Workflow, Zap } from 'lucide-react';
+import { BriefcaseIcon, CodeIcon, MenuIcon, X, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -31,11 +31,11 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   return (
     <nav className="bg-white shadow-lg relative">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-center h-16 relative">
+          {/* Logo - Absolute positioned to the left */}
           <div 
             onClick={handleLogoClick}
-            className="flex items-center space-x-2 cursor-pointer w-1/4"
+            className="absolute left-4 flex items-center space-x-2 cursor-pointer"
           >
             <ShieldCheck className="h-8 w-8 text-gray-900" />
             <span className="text-xl font-bold text-blue-600">
@@ -44,13 +44,13 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           </div>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex space-x-8 justify-center flex-1">
+          <div className="hidden md:flex space-x-8">
             <button
               onClick={() => handleNavigation('projects')}
               className={`flex items-center space-x-2 px-3 py-2 rounded-md ${
                 activeTab === 'projects'
                   ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                  : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
               <BriefcaseIcon className="h-5 w-5" />
@@ -69,8 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
             </button>
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4 w-1/4 justify-end">
+          {/* Desktop Auth Buttons - Absolute positioned to the right */}
+          <div className="hidden md:flex items-center space-x-4 absolute right-4">
             <Link
               to="/login"
               className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md"
@@ -85,9 +85,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Absolute positioned to the right */}
           <button 
-            className="md:hidden"
+            className="md:hidden absolute right-4"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (

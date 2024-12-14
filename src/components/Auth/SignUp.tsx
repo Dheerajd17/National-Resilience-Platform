@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, User, UserPlus } from 'lucide-react';
+import OTPVerification from './OTPVerification';
+import { checkEmailExists } from '../../utils/authUtils';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -16,6 +18,9 @@ const SignUp: React.FC = () => {
     password: '',
     confirmPassword: ''
   });
+  const [isOTPSent, setIsOTPSent] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
 
   // Password validation function
   const validatePassword = (password: string) => {
@@ -65,7 +70,35 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendOTP = async (email: string) => {
+    try {
+      setIsCheckingEmail(true);
+      // Check if email already exists
+      const emailExists = await checkEmailExists(email);
+      
+      if (emailExists) {
+        setErrors(prev => ({
+          ...prev,
+          email: 'This email is already registered. Please sign in instead.'
+        }));
+        return false;
+      }
+
+      // If email doesn't exist, proceed with OTP
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsOTPSent(true);
+      alert(`OTP sent to ${email}`);
+      return true;
+    } catch (error) {
+      console.error('Failed to send OTP:', error);
+      alert('Failed to send OTP. Please try again.');
+      return false;
+    } finally {
+      setIsCheckingEmail(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate all fields
@@ -82,13 +115,27 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    // Show success message
-    setShowSuccess(true);
+    if (!isOTPSent) {
+      // Send OTP if not already sent
+      const otpSent = await sendOTP(formData.email);
+      if (!otpSent) {
+        return;
+      }
+    }
+  };
 
+  const handleVerificationComplete = () => {
+    setIsVerified(true);
+    setShowSuccess(true);
+    
     // Redirect to home page after 2 seconds
     setTimeout(() => {
       navigate('/');
     }, 2000);
+  };
+
+  const handleResendOTP = async () => {
+    await sendOTP(formData.email);
   };
 
   return (
@@ -141,7 +188,7 @@ const SignUp: React.FC = () => {
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
-              <div className="mt-1">
+              <div className="mt-1 relative">
                 <input
                   id="email"
                   name="email"
@@ -153,11 +200,27 @@ const SignUp: React.FC = () => {
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.email ? 'border-red-300' : 'border-gray-300'
                   } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  disabled={isCheckingEmail}
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                {isCheckingEmail && (
+                  <div className="absolute right-3 top-2">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                  </div>
                 )}
               </div>
+              {errors.email && (
+                <div className="mt-1">
+                  <p className="text-sm text-red-600">{errors.email}</p>
+                  {errors.email.includes('already registered') && (
+                    <Link
+                      to="/login"
+                      className="text-sm text-blue-600 hover:text-blue-500 mt-1 inline-block"
+                    >
+                      Go to Sign In
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
 
             <div>
@@ -209,10 +272,18 @@ const SignUp: React.FC = () => {
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                Create Account
+                {isOTPSent ? 'Resend OTP' : 'Create Account'}
               </button>
             </div>
           </form>
+
+          {isOTPSent && !isVerified && (
+            <OTPVerification
+              email={formData.email}
+              onVerificationComplete={handleVerificationComplete}
+              onResendOTP={handleResendOTP}
+            />
+          )}
         </div>
       </div>
     </div>

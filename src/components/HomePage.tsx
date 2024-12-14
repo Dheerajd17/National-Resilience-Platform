@@ -17,6 +17,43 @@ const HomePage: React.FC = () => {
     }
   }, []);
 
+  const handleSignUpClick = () => {
+    navigate('/signup');
+    window.scrollTo(0, 0);
+  };
+
+  const handleBrowseProjects = () => {
+    navigate('/projects');
+    // Add a small delay to ensure navigation completes before focusing
+    setTimeout(() => {
+      const searchInput = document.querySelector('input[placeholder="Search projects..."]') as HTMLInputElement;
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }, 100);
+  };
+
+  const handleChooseContribution = () => {
+    navigate('/projects');
+    // Add a small delay to ensure navigation completes before scrolling
+    setTimeout(() => {
+      const projectCards = document.querySelector('.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
+      if (projectCards) {
+        projectCards.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  const handleSubmitProposal = () => {
+    navigate('/post-project');
+    window.scrollTo(0, 0);
+  };
+
+  const handleStartContributing = () => {
+    navigate('/signup');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Hero Section -Modified to remove the button */}
@@ -111,25 +148,37 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How it Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div 
+              onClick={handleBrowseProjects}
+              className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
+            >
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">1</div>
               <h3 className="font-bold mb-2">Browse Projects</h3>
               <p className="text-gray-600">Explore available projects that match your expertise</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div 
+              onClick={handleChooseContribution}
+              className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
+            >
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">2</div>
               <h3 className="font-bold mb-2">Choose Contribution</h3>
               <p className="text-gray-600">Select how you want to contribute - technically or financially</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div 
+              onClick={handleSubmitProposal}
+              className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
+            >
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">3</div>
               <h3 className="font-bold mb-2">Submit Proposal</h3>
               <p className="text-gray-600">Present your ideas or make your contribution</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+            <div 
+              onClick={handleStartContributing}
+              className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
+            >
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">4</div>
               <h3 className="font-bold mb-2">Start Contributing</h3>
               <p className="text-gray-600">Begin working on approved projects</p>
@@ -179,10 +228,10 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 text-center bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-8">
           <h2 className="text-3xl font-bold mb-8">Ready to Make a Difference?</h2>
           <button
-            onClick={() => navigate('/signup')}
+            onClick={handleSignUpClick}
             className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
-            Join Our Community
+            Register and join our community
           </button>
         </div>
       </div>
