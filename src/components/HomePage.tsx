@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Shield, Users, Globe, Lightbulb, CheckCircle, Target, Award, MessageSquare, LifeBuoy } from 'lucide-react';
+import { ArrowRight, Shield, Users, Globe, Lightbulb, CheckCircle, Target, Award, MessageSquare, LifeBuoy, Newspaper } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -54,6 +54,11 @@ const HomePage: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  const handleViewAllNews = () => {
+    navigate('/news');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Hero Section -Modified to remove the button */}
@@ -102,6 +107,109 @@ const HomePage: React.FC = () => {
                 <h3 className="font-bold text-xl mb-2">24/7</h3>
                 <p className="text-gray-600">Support Available</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* News Section - Vertical Scrollable */}
+      <div id="news" className="py-20 bg-[#f9fafb]">
+        <h2 className="text-3xl font-bold text-center mb-12">News Updates</h2>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 h-[500px] overflow-y-auto">
+            <div className="space-y-6">
+              <div className="border-b border-gray-200 pb-6">
+                <span className="text-sm text-blue-600 font-semibold">March 15, 2024</span>
+                <h3 className="text-xl font-bold my-2">New Cybersecurity Initiative</h3>
+                <p className="text-gray-600">
+                  Launch of a nationwide program to strengthen digital infrastructure security across critical sectors. The initiative aims to protect key national assets and improve response capabilities against cyber threats.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 pb-6">
+                <span className="text-sm text-blue-600 font-semibold">March 10, 2024</span>
+                <h3 className="text-xl font-bold my-2">AI Research Partnership</h3>
+                <p className="text-gray-600">
+                  Strategic collaboration with leading tech institutions to develop AI solutions for national security. This partnership will focus on developing cutting-edge AI applications for threat detection and prevention.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 pb-6">
+                <span className="text-sm text-blue-600 font-semibold">March 5, 2024</span>
+                <h3 className="text-xl font-bold my-2">Emergency Response System</h3>
+                <p className="text-gray-600">
+                  Successful deployment of new emergency response system in major metropolitan areas. The system has already shown significant improvements in response times and coordination capabilities.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 pb-6">
+                <span className="text-sm text-blue-600 font-semibold">February 28, 2024</span>
+                <h3 className="text-xl font-bold my-2">Blockchain Security Framework</h3>
+                <p className="text-gray-600">
+                  Development of a new blockchain-based security framework for critical infrastructure protection. This innovative approach will enhance the integrity and traceability of security operations.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 pb-6">
+                <span className="text-sm text-blue-600 font-semibold">February 20, 2024</span>
+                <h3 className="text-xl font-bold my-2">Smart City Integration</h3>
+                <p className="text-gray-600">
+                  Implementation of smart city technologies to enhance urban resilience and security. The project includes advanced sensors and AI-powered monitoring systems.
+                </p>
+              </div>
+
+              <div className="pb-6">
+                <span className="text-sm text-blue-600 font-semibold">February 15, 2024</span>
+                <h3 className="text-xl font-bold my-2">Quantum Computing Research</h3>
+                <p className="text-gray-600">
+                  Initiation of quantum computing research program for advanced cryptography and security applications. This groundbreaking research aims to future-proof our national security infrastructure.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <button
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              onClick={handleViewAllNews}
+            >
+              View All Updates
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Success Stories Section - Now after News */}
+      <div id="success-stories" className="py-20 bg-[#f9fafb]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Success Stories</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <Award className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-center">Cybersecurity Enhancement</h3>
+              <p className="text-gray-600 mb-4 text-center">
+                A team of experts developed an advanced threat detection system, improving national infrastructure security by 60%.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <Award className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-center">Emergency Response System</h3>
+              <p className="text-gray-600 mb-4 text-center">
+                Innovative AI-powered solution reduced emergency response times by 45% in critical situations.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="flex justify-center mb-4">
+                <Award className="h-12 w-12 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-center">Data Analytics Platform</h3>
+              <p className="text-gray-600 mb-4 text-center">
+                Created a comprehensive data analysis system that helped prevent multiple security breaches.
+              </p>
             </div>
           </div>
         </div>
@@ -182,42 +290,6 @@ const HomePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">4</div>
               <h3 className="font-bold mb-2">Start Contributing</h3>
               <p className="text-gray-600">Begin working on approved projects</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Success Stories Section */}
-      <div id="success-stories" className="py-20 bg-[#f9fafb]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Success Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex justify-center mb-4">
-                <Award className="h-12 w-12 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-center">Cybersecurity Enhancement</h3>
-              <p className="text-gray-600 mb-4 text-center">
-                A team of experts developed an advanced threat detection system, improving national infrastructure security by 60%.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex justify-center mb-4">
-                <Award className="h-12 w-12 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-center">Emergency Response System</h3>
-              <p className="text-gray-600 mb-4 text-center">
-                Innovative AI-powered solution reduced emergency response times by 45% in critical situations.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-blue-200 hover:shadow-lg transition-all duration-300">
-              <div className="flex justify-center mb-4">
-                <Award className="h-12 w-12 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-center">Data Analytics Platform</h3>
-              <p className="text-gray-600 mb-4 text-center">
-                Created a comprehensive data analysis system that helped prevent multiple security breaches.
-              </p>
             </div>
           </div>
         </div>

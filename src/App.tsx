@@ -16,6 +16,7 @@ import { useState } from 'react';
 import ProjectsPage from './components/ProjectsPage';
 import PostProject from './components/PostProject';
 import ApplicationsList from './components/Applications/ApplicationsList';
+import NewsPage from './components/NewsPage';
 
 // Create a BackButton component
 const BackButton = () => {
@@ -169,6 +170,7 @@ function App() {
           <Route path="/payment-gateway" element={<PaymentGateway />} />
           <Route path="/services" element={<ServiceCategories />} />
           <Route path="/services/:categoryId/applications" element={<ApplicationsListWrapper />} />
+          <Route path="/news" element={<NewsPage />} />
         </Routes>
 
         {/* Footer */}
@@ -205,6 +207,14 @@ function App() {
                       className="hover:text-white transition-colors duration-300"
                     >
                       Success Stories
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleScrollToSection('news')}
+                      className="hover:text-white transition-colors duration-300"
+                    >
+                      Latest Updates
                     </button>
                   </li>
                 </ul>
