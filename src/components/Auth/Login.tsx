@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate }from 'react-router-dom';
+import axios from 'axios';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Login: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -19,10 +20,26 @@ const Login: React.FC = () => {
       return;
     }
 
-    // Show success message
+    
+      try {
+      const response = await axios.post('/api/user/signin', credentials);
+      console.log(response.data);
+
+      if (response.data && response.data.token) {
+        sessionStorage.setItem('authToken', response.data.token);
+        handleVerificationComplete();
+      }
+      }
+      catch (error) {
+      // Handle error response
+      setError('Invalid email or password');
+      console.error(error);
+      }
+  };
+  
+  const handleVerificationComplete = () => {
     setShowSuccess(true);
     setError('');
-
     // Redirect to home page after 2 seconds
     setTimeout(() => {
       navigate('/');

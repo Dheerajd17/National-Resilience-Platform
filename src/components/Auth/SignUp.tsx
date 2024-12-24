@@ -118,7 +118,7 @@ const SignUp: React.FC = () => {
 
     try {
       const response = await axios.post('/api/user/signup', {
-        name: formData.name,
+        fullname: formData.name,
         email: formData.email,
         password: formData.password
       });
@@ -127,6 +127,7 @@ const SignUp: React.FC = () => {
 
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
+        //bypass the otp verification until its implemented
         handleVerificationComplete();
       } else {
         alert('Failed to create account. Please try again.');
@@ -136,13 +137,13 @@ const SignUp: React.FC = () => {
       alert('Failed to create account. Please try again.');
     }
 
-    // if (!isOTPSent) {
-    //   // Send OTP if not already sent
-    //   const otpSent = await sendOTP(formData.email);
-    //   if (!otpSent) {
-    //     return;
-    //   }
-    // }
+    if (!isOTPSent) {
+      // Send OTP if not already sent
+      const otpSent = await sendOTP(formData.email);
+      if (!otpSent) {
+        return;
+      }
+    }
   };
 
   const handleVerificationComplete = () => {
