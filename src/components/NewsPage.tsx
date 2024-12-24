@@ -36,7 +36,7 @@ const newsItems: NewsItem[] = [
     • Significant boost to local economy
     
     This initiative serves as a blueprint for similar projects across Northeast India, demonstrating how traditional markets can be modernized while maintaining their cultural significance.`,
-    image: "/images/ima-market.jpg"
+    image: "https://southasiaviews.com/wp-content/uploads/2021/04/ema-edited.jpg"
   },
   {
     date: "March 15, 2024",
@@ -53,7 +53,7 @@ const newsItems: NewsItem[] = [
     • Cross-sector coordination mechanisms
     
     The initiative will be implemented across multiple phases over the next 18 months, with initial deployments focusing on critical infrastructure sectors such as energy, healthcare, and transportation.`,
-    image: "/images/cyber-security.jpg"
+    image: "https://nhtechalliance.org/wp-content/uploads/2024/03/NHTA-Header.png"
   },
   {
     date: "March 10, 2024",
@@ -70,7 +70,7 @@ const newsItems: NewsItem[] = [
     • Establishing AI-driven emergency response systems
 
     This initiative represents a significant step forward in combining academic expertise with practical security applications.`,
-    image: "/images/ai-research.jpg"
+    image: "https://news.liverpool.ac.uk/wp-content/uploads/2023/11/AI-GettyImages-1452604857WEB.jpg"
   },
   {
     date: "March 5, 2024",
@@ -87,7 +87,7 @@ const newsItems: NewsItem[] = [
     • AI-powered decision support
     
     Initial results show a 45% improvement in response times and enhanced coordination between different emergency services.`,
-    image: "/images/emergency-response.jpg"
+    image: "https://www.karexpert.com/wp-content/uploads/2022/04/ambulance-hero.webp"
   },
   {
     date: "February 28, 2024",
@@ -102,7 +102,7 @@ const newsItems: NewsItem[] = [
     • Decentralized security protocols
     • Smart contract automation
     • Enhanced data integrity verification`,
-    image: "/images/blockchain.jpg"
+    image: "https://pixelplex.io/wp-content/uploads/2021/01/everything-you-need-to-know-about-blockchain-security-main-1600.jpg"
   },
   {
     date: "February 20, 2024",
@@ -117,7 +117,7 @@ const newsItems: NewsItem[] = [
     • Environmental monitoring
     • Traffic management integration
     • Public safety enhancement measures`,
-    image: "/images/smart-city.jpg"
+    image: "https://media.licdn.com/dms/image/v2/D5612AQFkEB0bwhst8Q/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709808629051?e=2147483647&v=beta&t=ZY4qh8vAZZL61Z7iz-qEv9nMOQrb3XDxjHNmjYDF_T4"
   },
   {
     date: "February 15, 2024",
@@ -132,7 +132,7 @@ const newsItems: NewsItem[] = [
     • Quantum key distribution
     • Quantum-resistant algorithms
     • Secure communication protocols`,
-    image: "/images/quantum.jpg"
+    image: "https://wordpress.cdsec.co.uk/wp-content/uploads/2023/07/Quantum-Computing-Image_CSIAC_Journal_V7N1_WEB-panorama-dd57de6705583cdec20f5dbf27ac1476-60b8e1dac01c5.jpeg"
   },
   {
     date: "February 10, 2024",
@@ -147,7 +147,7 @@ const newsItems: NewsItem[] = [
     • Joint response protocols
     • Collaborative research initiatives
     • Cross-border threat mitigation`,
-    image: "/images/international.jpg"
+    image: "https://resources.appsealing.com/4-svc/wp-content/uploads/2022/01/10142405/cyber-security-regulations-image.png"
   },
   {
     date: "February 5, 2024",
@@ -162,7 +162,7 @@ const newsItems: NewsItem[] = [
     • Resilient design implementation
     • Emergency response protocols
     • Staff training and development`,
-    image: "/images/infrastructure.jpg"
+    image: "https://media.licdn.com/dms/image/v2/D4D12AQFvZEOtn1UaBw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1708866881615?e=2147483647&v=beta&t=V7TlJOkNEhpWkMb71uaeXQPHd0b25NhVIfsVIvZ_qZU"
   }
 ];
 
