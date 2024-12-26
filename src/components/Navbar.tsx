@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2 } from 'lucide-react';
+import { AuthContext } from '../context/AuthContext';
 
 interface NavbarProps {
   activeTab: string;
@@ -9,6 +10,10 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
+  const isAuthenticated = authContext?.isAuthenticated;
+  const user = authContext?.user;
+  const logout = authContext?.logout;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
@@ -71,18 +76,32 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
 
           {/* Desktop Auth Buttons - Absolute positioned to the right */}
           <div className="hidden md:flex items-center space-x-4 absolute right-4">
-            <Link
-              to="/login"
-              className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md font-bold"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-bold"
-            >
-              Sign Up
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-600">Welcome, {user?.fullname}</span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-bold"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md font-bold"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-bold"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button - Absolute positioned to the right */}
@@ -124,20 +143,31 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                 <CodeIcon className="h-5 w-5" />
                 <span>Software Services</span>
               </button>
-              <Link
-                to="/login"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/signup"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
-              >
-                Sign Up
-              </Link>
+              {isAuthenticated ? (
+                <button
+                  onClick={logout}
+                  className="px-4 py-3 text-red-600 hover:bg-red-50 font-bold"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/signup"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="px-4 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-bold"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}

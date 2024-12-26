@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate }from 'react-router-dom';
 import axios from 'axios';
+import { useAuthContext } from '../../context/AuthContext';
+
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
+  const { setIsAuthenticated } = useAuthContext();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -20,13 +24,11 @@ const Login: React.FC = () => {
       return;
     }
 
-    
       try {
       const response = await axios.post('/api/user/signin', credentials);
-      console.log(response.data);
-
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
+        login(response.data.user);
         handleVerificationComplete();
       }
       }
@@ -38,6 +40,7 @@ const Login: React.FC = () => {
   };
   
   const handleVerificationComplete = () => {
+    setIsAuthenticated(true);
     setShowSuccess(true);
     setError('');
     // Redirect to home page after 2 seconds

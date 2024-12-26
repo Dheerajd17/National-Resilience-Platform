@@ -4,9 +4,11 @@ import { Mail, Lock, User, UserPlus } from 'lucide-react';
 import OTPVerification from './OTPVerification';
 import { checkEmailExists } from '../../utils/authUtils';
 import axios from 'axios';
+import { useAuthContext } from '../../context/AuthContext';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -128,6 +130,7 @@ const SignUp: React.FC = () => {
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
         //bypass the otp verification until its implemented
+        login(response.data.token);
         handleVerificationComplete();
       } else {
         alert('Failed to create account. Please try again.');
