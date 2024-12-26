@@ -3,9 +3,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, User, UserPlus } from 'lucide-react';
 import OTPVerification from './OTPVerification';
 import { checkEmailExists } from '../../utils/authUtils';
+import axios from 'axios';
+import { useAuthContext } from '../../context/AuthContext';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -115,6 +118,28 @@ const SignUp: React.FC = () => {
       return;
     }
 
+    try {
+      const response = await axios.post('/api/user/signup', {
+        fullname: formData.name,
+        email: formData.email,
+        password: formData.password
+      });
+
+      console.log('Signup response:', response.data);
+
+      if (response.data && response.data.token) {
+        sessionStorage.setItem('authToken', response.data.token);
+        //bypass the otp verification until its implemented
+        login(response.data.token);
+        handleVerificationComplete();
+      } else {
+        alert('Failed to create account. Please try again.');
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      alert('Failed to create account. Please try again.');
+    }
+
     if (!isOTPSent) {
       // Send OTP if not already sent
       const otpSent = await sendOTP(formData.email);
@@ -161,7 +186,7 @@ const SignUp: React.FC = () => {
             <div className="mb-4 p-4 rounded-md bg-green-50 text-green-800">
               Account created successfully! Redirecting...
             </div>
-          )}
+          )}  
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>

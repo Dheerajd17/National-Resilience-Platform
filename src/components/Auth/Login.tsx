@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate }from 'react-router-dom';
+import axios from 'axios';
+import { useAuthContext } from '../../context/AuthContext';
+
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
+  const { setIsAuthenticated } = useAuthContext();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -10,7 +15,7 @@ const Login: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -19,10 +24,25 @@ const Login: React.FC = () => {
       return;
     }
 
-    // Show success message
+      try {
+      const response = await axios.post('/api/user/signin', credentials);
+      if (response.data && response.data.token) {
+        sessionStorage.setItem('authToken', response.data.token);
+        login(response.data.user);
+        handleVerificationComplete();
+      }
+      }
+      catch (error) {
+      // Handle error response
+      setError('Invalid email or password');
+      console.error(error);
+      }
+  };
+  
+  const handleVerificationComplete = () => {
+    setIsAuthenticated(true);
     setShowSuccess(true);
     setError('');
-
     // Redirect to home page after 2 seconds
     setTimeout(() => {
       navigate('/');

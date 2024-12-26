@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 interface OTPVerificationProps {
   email: string;
   onVerificationComplete: () => void;
@@ -78,7 +79,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ email, onVerification
           }}
           onKeyDown={(e) => {
             if (e.key === 'Backspace' && !otp[i] && i > 0) {
-              const prevInput = e.target.parentElement?.previousElementSibling?.querySelector('input');
+              const prevInput = (e.target as HTMLInputElement).parentElement?.previousElementSibling?.querySelector('input');
               if (prevInput) prevInput.focus();
             }
           }}
