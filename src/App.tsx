@@ -17,6 +17,7 @@ import ProjectsPage from './components/ProjectsPage';
 import PostProject from './components/PostProject';
 import ApplicationsList from './components/Applications/ApplicationsList';
 import NewsPage from './components/NewsPage';
+import AuthCheck from './utils/authCheck';
 
 // Create a BackButton component
 const BackButton = () => {
@@ -161,15 +162,35 @@ function App() {
               />
             } 
           />
-          <Route path="/post-project" element={<PostProject />} />
+          <Route path="/post-project" element={
+            <AuthCheck authentication={true}>
+              <PostProject />
+            </AuthCheck>
+            } />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp/>} />
           <Route path="/project/:id" element={<ProjectDetails />} />
-          <Route path="/project/:id/financial" element={<FinancialContribution />} />
-          <Route path="/project/:id/engineer" element={<EngineerContribution />} />
-          <Route path="/payment-gateway" element={<PaymentGateway />} />
+          <Route path="/project/:id/financial" element={
+            <AuthCheck authentication={true}>
+              <FinancialContribution />
+            </AuthCheck>
+            } />
+          <Route path="/project/:id/engineer" element={
+            <AuthCheck authentication={true}>
+              <EngineerContribution />
+            </AuthCheck>
+            } />
+          <Route path="/payment-gateway" element={
+            <AuthCheck authentication={true}>
+              <PaymentGateway />
+            </AuthCheck>
+            } />
           <Route path="/services" element={<ServiceCategories />} />
-          <Route path="/services/:categoryId/applications" element={<ApplicationsListWrapper />} />
+          <Route path="/services/:categoryId/applications" element={
+            <AuthCheck authentication={true}>
+              <ApplicationsListWrapper />
+            </AuthCheck>
+            } />
           <Route path="/news" element={<NewsPage />} />
         </Routes>
 

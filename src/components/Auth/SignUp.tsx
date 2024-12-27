@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, User, UserPlus } from 'lucide-react';
 import OTPVerification from './OTPVerification';
-import { checkEmailExists } from '../../utils/authUtils';
+import { checkEmailExists } from '../../utils/vaildEmail';
 import axios from 'axios';
 import { useAuthContext } from '../../context/AuthContext';
 
