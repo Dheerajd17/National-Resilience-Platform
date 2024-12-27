@@ -28,7 +28,7 @@ const Login: React.FC = () => {
       const response = await axios.post('/api/user/signin', credentials);
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
-        login(response.data.user);
+        login({fullname: "Sanjay",email: "xyz@gmail.com"});
         handleVerificationComplete();
       }
       }

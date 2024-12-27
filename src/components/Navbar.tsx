@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2 } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext, useAuthContext } from '../context/AuthContext';
 
 interface NavbarProps {
   activeTab: string;
@@ -10,10 +10,12 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
-  const isAuthenticated = authContext?.isAuthenticated;
-  const user = authContext?.user;
-  const logout = authContext?.logout;
+  // const authContext = useContext(AuthContext);
+  // const isAuthenticated = authContext?.isAuthenticated;
+  // const user = authContext?.user;
+  // const logout = authContext?.logout;
+
+  const { isAuthenticated, user, logout } = useAuthContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
