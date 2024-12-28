@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2, CircleUser, UserRoundPen   } from 'lucide-react';
+import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2, CircleUser, UserRoundPen, LogOut} from 'lucide-react';
 import { useAuthContext } from '../context/AuthContext';
 
 interface NavbarProps {
@@ -26,6 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
       navigate('/projects');
     } else if (tab === 'services') {
       navigate('/services');
+    }else if (tab === 'profile') {
+      navigate('/profile');
     }
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
@@ -35,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   };
 
   return (
-    <nav className="bg-white shadow-lg relative">
+    <nav className="bg-white shadow-lg relative" >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center h-16 relative">
           {/* Logo - Absolute positioned to the left */}
@@ -80,22 +82,24 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           {isAuthenticated ? (
               <div className="relative">
                 <CircleUser
-                  className="h-8 w-8 text-gray-600 cursor-pointer"
+                  className="h-8 w-8 hover:text-blue-700 cursor-pointer"
                   onClick={handleProfileClick}
                 />
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                  <div className="absolute rounded-md right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50 " >
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      className="text-gray-900 rounded-md hover:text-blue-600 hover:bg-blue-100 flex px-4 py-2 items-center basis-1/4"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
+                      <UserRoundPen className="h-6 w-6 basis-1/4"/>
                       Profile
                     </Link>
                     <button
                       onClick={logout}
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      className="flex w-full rounded-md text-left px-4 py-2 items-center basis-1/4 text-gray-900 hover:text-blue-600 hover:bg-blue-100"
                     >
+                      <LogOut className="h-6 w-6 basis-1/4"/>
                       Logout
                     </button>
                   </div>
@@ -160,30 +164,27 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
               </button>
               {isAuthenticated ? (
                 <div className="relative">
-                  <CircleUser
-                    className="h-8 w-8 text-gray-600 cursor-pointer"
-                    onClick={handleProfileClick}
-                  />
-                  {isProfileMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                        onClick={() => setIsProfileMenuOpen(false)}
-                      >
-                        Profile
-                      </Link>
-                      <button
-                        onClick={logout}
-                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
+                    <button
+                      className={`flex w-full items-center space-x-2 px-4 py-3 font-bold ${
+                      activeTab === 'profile'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
+                  }`}
+                  onClick={() => handleNavigation('profile')}
+                >
+                  <CircleUser className="h-6 w-6" />
+                  <span>Profile</span>
+                </button>
+                <button
+                  onClick={logout}
+                  className={'flex w-full space-x-2 font-bold px-4 py-3 items-center text-gray-600 hover:text-blue-600 hover:bg-blue-100'}
+                >
+                  <LogOut className="h-6 w-6 space-x-3"/>
+                  <span>Logout</span>  
+                </button>
+              </div>
               ) : (
-                <>
+                <div className="flex flex-col py-4 px-4 ">
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
@@ -198,7 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   >
                     Sign Up
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </div>
