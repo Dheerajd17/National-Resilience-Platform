@@ -18,6 +18,7 @@ import PostProject from './components/PostProject';
 import ApplicationsList from './components/Applications/ApplicationsList';
 import NewsPage from './components/NewsPage';
 import AuthCheck from './utils/authCheck';
+import Profile from './components/Profile';
 
 // Create a BackButton component
 const BackButton = () => {
@@ -169,6 +170,12 @@ function App() {
             } />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp/>} />
+          <Route path="/profile" element={
+            <AuthCheck authentication={true}>
+              <Profile />
+            </AuthCheck>
+            } />
+
           <Route path="/project/:id" element={<ProjectDetails />} />
           <Route path="/project/:id/financial" element={
             <AuthCheck authentication={true}>

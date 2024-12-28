@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2 } from 'lucide-react';
-import { AuthContext, useAuthContext } from '../context/AuthContext';
+import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2, CircleUser, UserRoundPen   } from 'lucide-react';
+import { useAuthContext } from '../context/AuthContext';
 
 interface NavbarProps {
   activeTab: string;
@@ -10,13 +10,9 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
-  // const authContext = useContext(AuthContext);
-  // const isAuthenticated = authContext?.isAuthenticated;
-  // const user = authContext?.user;
-  // const logout = authContext?.logout;
-
   const { isAuthenticated, user, logout } = useAuthContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
     setActiveTab('');
@@ -33,6 +29,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
     }
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
+  };
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
   };
 
   return (
@@ -78,17 +77,31 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
 
           {/* Desktop Auth Buttons - Absolute positioned to the right */}
           <div className="hidden md:flex items-center space-x-4 absolute right-4">
-            {isAuthenticated ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-600">Welcome, {user?.fullname}</span>
-                <button
-                  onClick={logout}
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-bold"
-                >
-                  Logout
-                </button>
+          {isAuthenticated ? (
+              <div className="relative">
+                <CircleUser
+                  className="h-8 w-8 text-gray-600 cursor-pointer"
+                  onClick={handleProfileClick}
+                />
+                {isProfileMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
-            ) : (
+            )  : (
               <>
                 <Link
                   to="/login"
@@ -146,12 +159,29 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                 <span>Software Services</span>
               </button>
               {isAuthenticated ? (
-                <button
-                  onClick={logout}
-                  className="px-4 py-3 text-red-600 hover:bg-red-50 font-bold"
-                >
-                  Logout
-                </button>
+                <div className="relative">
+                  <CircleUser
+                    className="h-8 w-8 text-gray-600 cursor-pointer"
+                    onClick={handleProfileClick}
+                  />
+                  {isProfileMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        onClick={logout}
+                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <>
                   <Link
