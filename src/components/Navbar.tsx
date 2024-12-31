@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2 } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
+import { CodeIcon, MenuIcon, X, ShieldCheck, FolderGit2, CircleUser, UserRoundPen, LogOut} from 'lucide-react';
+import { useAuthContext } from '../context/AuthContext';
 
 interface NavbarProps {
   activeTab: string;
@@ -10,11 +10,9 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
-  const isAuthenticated = authContext?.isAuthenticated;
-  const user = authContext?.user;
-  const logout = authContext?.logout;
+  const { isAuthenticated, user, logout } = useAuthContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
     setActiveTab('');
@@ -28,13 +26,18 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
       navigate('/projects');
     } else if (tab === 'services') {
       navigate('/services');
+    }else if (tab === 'profile') {
+      navigate('/profile');
     }
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
 
   return (
-    <nav className="bg-white shadow-lg relative">
+    <nav className="bg-white shadow-lg relative" >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center h-16 relative">
           {/* Logo - Absolute positioned to the left */}
@@ -76,17 +79,33 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
 
           {/* Desktop Auth Buttons - Absolute positioned to the right */}
           <div className="hidden md:flex items-center space-x-4 absolute right-4">
-            {isAuthenticated ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-600">Welcome, {user?.fullname}</span>
-                <button
-                  onClick={logout}
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-bold"
-                >
-                  Logout
-                </button>
+          {isAuthenticated ? (
+              <div className="relative">
+                <CircleUser
+                  className="h-8 w-8 hover:text-blue-700 cursor-pointer"
+                  onClick={handleProfileClick}
+                />
+                {isProfileMenuOpen && (
+                  <div className="absolute rounded-md right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50 " >
+                    <Link
+                      to="/profile"
+                      className="text-gray-900 rounded-md hover:text-blue-600 hover:bg-blue-100 flex px-4 py-2 items-center basis-1/4"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <UserRoundPen className="h-6 w-6 basis-1/4"/>
+                      Profile
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="flex w-full rounded-md text-left px-4 py-2 items-center basis-1/4 text-gray-900 hover:text-blue-600 hover:bg-blue-100"
+                    >
+                      <LogOut className="h-6 w-6 basis-1/4"/>
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
-            ) : (
+            )  : (
               <>
                 <Link
                   to="/login"
@@ -144,14 +163,28 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                 <span>Software Services</span>
               </button>
               {isAuthenticated ? (
+                <div className="relative">
+                    <button
+                      className={`flex w-full items-center space-x-2 px-4 py-3 font-bold ${
+                      activeTab === 'profile'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
+                  }`}
+                  onClick={() => handleNavigation('profile')}
+                >
+                  <CircleUser className="h-6 w-6" />
+                  <span>Profile</span>
+                </button>
                 <button
                   onClick={logout}
-                  className="px-4 py-3 text-red-600 hover:bg-red-50 font-bold"
+                  className={'flex w-full space-x-2 font-bold px-4 py-3 items-center text-gray-600 hover:text-blue-600 hover:bg-blue-100'}
                 >
-                  Logout
+                  <LogOut className="h-6 w-6 space-x-3"/>
+                  <span>Logout</span>  
                 </button>
+              </div>
               ) : (
-                <>
+                <div className="flex flex-col py-4 px-4 ">
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
@@ -166,7 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   >
                     Sign Up
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </div>
