@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
-              <FolderGit2 className="h-5 w-5" />
+              <FolderGit2 className="h-6 w-6" />
               <span>Project Contributions</span>
             </button>
             <button
@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
-              <CodeIcon className="h-5 w-5" />
+              <CodeIcon className="h-6 w-6" />
               <span>Software Services</span>
             </button>
           </div>
@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
-                <FolderGit2 className="h-5 w-5" />
+                <FolderGit2 className="h-6 w-6" />
                 <span>Project Contributions</span>
               </button>
               <button
@@ -159,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
-                <CodeIcon className="h-5 w-5" />
+                <CodeIcon className={"h-6 w-6"} />
                 <span>Software Services</span>
               </button>
               {isAuthenticated ? (

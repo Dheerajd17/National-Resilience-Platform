@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
-import { User, Folder } from 'lucide-react';
+import { User, Folder, FolderGit2 } from 'lucide-react';
 
 const Profile: React.FC = () => {
   const { user } = useAuthContext();
@@ -35,19 +35,19 @@ const Profile: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="w-1/5 bg-blue-600 text-white p-4 font-bold rounded-r-lg">
-        <ul>
+      <div className={'w-1/5 bg-blue-600 text-white  p-4 font-bold rounded-r-lg '}>
+        <ul className={'flex flex-col space-y-1'}>
           <li
-            className={`p-3 cursor-pointer rounded-lg text-white-600 hover:text-white-600 hover:bg-blue-700 flex items-center ${selectedMenu === 'Profile' ? 'bg-blue-700' : ''}`}
+            className={`p-3 cursor-pointer rounded-lg hover:bg-blue-700 hover:opacity-100 flex items-center ${selectedMenu === 'Profile' ? 'bg-blue-700 opacity-100' : 'opacity-85'}`}
             onClick={() => setSelectedMenu('Profile')}
           >
-            <User className="mr-2" /> Profile
+            <User className={"mr-3 h-6 w-6"} /> Profile
           </li>
           <li
-            className={`p-3 cursor-pointer rounded-lg text-white-600 hover:text-white-600 hover:bg-blue-700 flex items-center ${selectedMenu === 'Projects' ? 'bg-blue-700' : ''}`}
+            className={`p-3 cursor-pointer rounded-lg hover:bg-blue-700 hover:opacity-100 flex items-center ${selectedMenu === 'Projects' ? 'bg-blue-700 opacity-100' : 'opacity-85'}`}
             onClick={() => setSelectedMenu('Projects')}
           >
-            <Folder className="mr-2" /> Projects
+            <FolderGit2 className={"mr-3 h-6 w-6"} /> Projects
           </li>
         </ul>
       </div>
