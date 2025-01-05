@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
-import { User, Folder, FolderGit2 } from 'lucide-react';
+import { User, FolderGit2 } from 'lucide-react';
 
 const Profile: React.FC = () => {
   const { user } = useAuthContext();
