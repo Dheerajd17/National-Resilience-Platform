@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
   };
 
   const handleStartContributing = () => {
-    navigate('/signup');
+    navigate('/projects');
     window.scrollTo(0, 0);
   };
 

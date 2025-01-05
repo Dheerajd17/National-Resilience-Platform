@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
@@ -12,6 +12,7 @@ interface ProtectedProps {
 export default function Protected({ children, authentication = true }: ProtectedProps) {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthContext();
+  console.log(isAuthenticated, "In Protected");
 
   useEffect(() => {
     if (authentication && !isAuthenticated) {

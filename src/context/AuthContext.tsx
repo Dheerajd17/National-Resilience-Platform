@@ -31,9 +31,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (token) {
       // Fetch user information using the token
       setIsAuthenticated(true);
-      setUser({ fullname: 'John Doe', email: 'john.doe@example.com' }); // Replace with actual user data
+      setUser({ fullname: "Sanjay", email: "xyz@gmail.com" });
     }
   }, []);
+
+  useEffect(() => { 
+    console.log(user,"In AuthProvider");
+  }, [user]);
+
 
   const login = (user: { fullname: string; email: string }) => {
     setIsAuthenticated(true);
