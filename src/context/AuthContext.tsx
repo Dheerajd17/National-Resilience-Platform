@@ -2,9 +2,11 @@ import React, { createContext, useState, useEffect } from 'react';
 
 interface AuthContextProps {
   isAuthenticated: boolean;
+  loading : boolean;
   user: { fullname: string ,email :string} | null;
   login: (user: { fullname: string; email: string }) => void;
   logout: () => void;
+  setLoading : (value: boolean) => void;
   setIsAuthenticated: (value: boolean) => void;
 }
 
@@ -25,6 +27,7 @@ export const useAuthContext = (): AuthContextProps => {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<{ fullname: string; email: string } | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
@@ -52,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout ,setIsAuthenticated}}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout ,setIsAuthenticated, loading, setLoading}}>
       {children}
     </AuthContext.Provider>
   );
