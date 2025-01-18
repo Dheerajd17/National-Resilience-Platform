@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           {isAuthenticated ? (
               <div className="relative">
                 <CircleUser
-                  className="h-8 w-8 hover:text-blue-700 cursor-pointer"
+                  className="h-8 w-8 hover:text-blue-700 cursor-pointer opacity-70 hover:opacity-100" 
                   onClick={handleProfileClick}
                 />
                 {isProfileMenuOpen && (
