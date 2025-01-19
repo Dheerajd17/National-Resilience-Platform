@@ -140,13 +140,13 @@ const SignUp: React.FC = () => {
       alert('Failed to create account. Please try again.');
     }
 
-    if (!isOTPSent) {
-      // Send OTP if not already sent
-      const otpSent = await sendOTP(formData.email);
-      if (!otpSent) {
-        return;
-      }
-    }
+    // if (!isOTPSent) {
+    //   // Send OTP if not already sent
+    //   const otpSent = await sendOTP(formData.email);
+    //   if (!otpSent) {
+    //     return;
+    //   }
+    // }
   };
 
   const handleVerificationComplete = () => {
