@@ -7,7 +7,7 @@ import { useAuthContext } from '../../context/AuthContext';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuthContext();
-  const { setIsAuthenticated } = useAuthContext();
+  // const { setIsAuthenticated } = useAuthContext();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -28,6 +28,7 @@ const Login: React.FC = () => {
       const response = await axios.post('/api/user/signin', credentials);
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
+        //temporarily setting user details
         login({fullname: "Sanjay",email: "xyz@gmail.com"});
         handleVerificationComplete();
       }
