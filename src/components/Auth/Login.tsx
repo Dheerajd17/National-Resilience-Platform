@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   };
   
   const handleVerificationComplete = () => {
-    setIsAuthenticated(true);
+    // setIsAuthenticated(true);
     setShowSuccess(true);
     setError('');
     // Redirect to home page after 2 seconds

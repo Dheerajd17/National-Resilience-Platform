@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
-              <FolderGit2 className="h-5 w-5" />
+              <FolderGit2 className="h-6 w-6" />
               <span>Project Contributions</span>
             </button>
             <button
@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                   : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
               }`}
             >
-              <CodeIcon className="h-5 w-5" />
+              <CodeIcon className="h-6 w-6" />
               <span>Software Services</span>
             </button>
           </div>
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           {isAuthenticated ? (
               <div className="relative">
                 <CircleUser
-                  className="h-8 w-8 hover:text-blue-700 cursor-pointer"
+                  className="h-8 w-8 hover:text-blue-700 cursor-pointer opacity-70 hover:opacity-100" 
                   onClick={handleProfileClick}
                 />
                 {isProfileMenuOpen && (
@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
-                <FolderGit2 className="h-5 w-5" />
+                <FolderGit2 className="h-6 w-6" />
                 <span>Project Contributions</span>
               </button>
               <button
@@ -159,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
                     : 'text-gray-600 hover:text-blue-600 hover:bg-blue-100'
                 }`}
               >
-                <CodeIcon className="h-5 w-5" />
+                <CodeIcon className={"h-6 w-6"} />
                 <span>Software Services</span>
               </button>
               {isAuthenticated ? (

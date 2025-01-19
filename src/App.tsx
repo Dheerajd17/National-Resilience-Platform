@@ -1,8 +1,7 @@
-import React from 'react';
+import React , { useEffect }from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, useParams } from 'react-router-dom';
-import { SearchIcon, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Navbar from './components/Navbar';
-import ProjectCard from './components/ProjectCard';
 import ServiceCategories from './components/ServiceCategories';
 import ProjectDetails from './components/ProjectDetails';
 import FinancialContribution from './components/FinancialContribution';
@@ -19,6 +18,7 @@ import ApplicationsList from './components/Applications/ApplicationsList';
 import NewsPage from './components/NewsPage';
 import AuthCheck from './utils/authCheck';
 import Profile from './components/Profile';
+import { useAuthContext } from './context/AuthContext';
 
 // Create a BackButton component
 const BackButton = () => {
@@ -50,10 +50,11 @@ const ApplicationsListWrapper = () => {
 };
 
 function App() {
-  const [activeTab, setActiveTab] = React.useState('');
+  const [activeTab, setActiveTab] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [activeCategory, setActiveCategory] = useState('All Categories');
+  const { user, login } = useAuthContext();
 
   const categories = [
     'All Categories',
@@ -62,6 +63,15 @@ function App() {
     'AI/ML',
     'DevOps'
   ];
+
+  useEffect(()=>{
+    console.log("App effect")
+    login({fullname: "Sanjay",email: "xyz@gmail.com"});
+    if(user){
+      login(user);
+    }
+  },[])
+
 
   const handleCategoryFilter = (category: string) => {
     setActiveCategory(category);
@@ -142,6 +152,7 @@ function App() {
   };
 
   return (
+    
     <Router>
       <div className="min-h-screen bg-gray-50">
         <BackButton />
@@ -168,8 +179,16 @@ function App() {
               <PostProject />
             </AuthCheck>
             } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/login" element={
+            <AuthCheck authentication={false}>
+              <Login />
+            </AuthCheck>
+          } />
+          <Route path="/signup" element={
+            <AuthCheck authentication={false}>
+              <SignUp />
+            </AuthCheck>
+          } />
           <Route path="/profile" element={
             <AuthCheck authentication={true}>
               <Profile />
@@ -200,6 +219,8 @@ function App() {
             } />
           <Route path="/news" element={<NewsPage />} />
         </Routes>
+
+        
 
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-12 mt-20">
