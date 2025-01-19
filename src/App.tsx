@@ -65,8 +65,6 @@ function App() {
   ];
 
   useEffect(()=>{
-    console.log("App effect")
-    // login({fullname: "Sanjay",email: "xyz@gmail.com"});
     if(user){
       login(user);
     }

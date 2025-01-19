@@ -24,6 +24,7 @@ const SignUp: React.FC = () => {
   const [isOTPSent, setIsOTPSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
+  const backend_url = import.meta.env.BACKEND_URL as string;
 
   // Password validation function
   const validatePassword = (password: string) => {
@@ -119,7 +120,7 @@ const SignUp: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('/api/user/signup', {
+      const response = await axios.post(`${backend_url}/api/user/signup`, {
         fullname: formData.name,
         email: formData.email,
         password: formData.password
