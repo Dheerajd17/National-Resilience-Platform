@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   });
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
-  const backend_url = import.meta.env.VITE_BACKEND_URL;
+  const backend_url = import.meta.env.VITE_BACKEND_URL as string;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
