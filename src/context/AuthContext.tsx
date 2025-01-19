@@ -31,6 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
+    console.log(token);
     if (token) {
       // Fetch user information using the token
       setIsAuthenticated(true);
