@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     }
 
       try {
-      const response = await axios.post('https://nrp-backend.onrender.com/api/user/signin', credentials);
+      const response = await axios.post('/api/user/signin', credentials);
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
         //temporarily setting user details
