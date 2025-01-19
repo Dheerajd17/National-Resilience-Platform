@@ -60,21 +60,3 @@ To get started with the frontend development, follow these steps:
    ```bash
    npm run dev
    ```
-
-4. **Build the project for production**:
-   ```bash
-   npm run build
-   ```
-
-5. **Preview the production build**:
-   ```bash
-   npm run preview
-   ```
-
-## Contributing
-
-Contributions are welcome! Please follow the guidelines in the repository for submitting pull requests and issues.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
