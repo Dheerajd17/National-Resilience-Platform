@@ -16,7 +16,7 @@ import ProjectsPage from './components/ProjectsPage';
 import PostProject from './components/PostProject';
 import ApplicationsList from './components/Applications/ApplicationsList';
 import NewsPage from './components/NewsPage';
-import AuthCheck from './utils/authCheck';
+import AuthCheck from './utils/AuthCheck';
 import Profile from './components/Profile';
 import { useAuthContext } from './context/AuthContext';
 
@@ -65,8 +65,6 @@ function App() {
   ];
 
   useEffect(()=>{
-    console.log("App effect")
-    login({fullname: "Sanjay",email: "xyz@gmail.com"});
     if(user){
       login(user);
     }

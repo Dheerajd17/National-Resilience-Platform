@@ -7,13 +7,14 @@ import { useAuthContext } from '../../context/AuthContext';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuthContext();
-  const { setIsAuthenticated } = useAuthContext();
+  // const { setIsAuthenticated } = useAuthContext();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
+  const backend_url = import.meta.env.BACKEND_URL as string;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,9 +26,10 @@ const Login: React.FC = () => {
     }
 
       try {
-      const response = await axios.post('/api/user/signin', credentials);
+      const response = await axios.post(`${backend_url}/api/user/signin`, credentials);
       if (response.data && response.data.token) {
         sessionStorage.setItem('authToken', response.data.token);
+        //temporarily setting user details
         login({fullname: "Sanjay",email: "xyz@gmail.com"});
         handleVerificationComplete();
       }
